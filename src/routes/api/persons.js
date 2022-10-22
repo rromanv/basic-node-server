@@ -17,22 +17,34 @@ router.get('/', (req, res) => {
 
 router.get('/:id', (req, res) => {
   const person = getPerson(req.params.id)
-  res.send(person)
+  if (person) {
+    res.send(person)
+  }
+  res.status(404).send({ msg: 'Person not found' })
 })
 
 router.post('/', (req, res) => {
   const newPerson = createPerson(req.body)
-  res.send(newPerson)
+  if (newPerson) {
+    res.status(201).send(newPerson)
+  }
+  res.status(400).send({ msg: 'Bad request' })
 })
 
 router.put('/:id', (req, res) => {
-  updatePerson(req.params.id, req.body)
-  res.send({ msg: `Person ${req.params.id} Updated` })
+  const updatedPerson = updatePerson(req.params.id, req.body)
+  if (updatedPerson) {
+    res.send(updatedPerson)
+  }
+  res.status(404).send({ msg: 'Person not found' })
 })
 
 router.delete('/:id', (req, res) => {
-  deletePerson(req.params.id)
-  res.send({ msg: `Person ${req.params.id} Deleted` })
+  const deleted = deletePerson(req.params.id)
+  if (deleted) {
+    res.send({ msg: `Person ${req.params.id} Deleted` })
+  }
+  res.status(404).send({ msg: 'Person not found' })
 })
 
 export default router
