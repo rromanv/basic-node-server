@@ -1,17 +1,22 @@
+import { PrismaClient } from '@prisma/client'
 import { v4 as uuid } from 'uuid'
+
+const db = new PrismaClient()
 
 const persons = []
 
-export const getPersons = () => persons
+export const getPersons = async () => db.employee.findMany()
 
-export const getPerson = (id) => {
-  return persons.find((person) => person.id === id)
+export const getPerson = async (id) => {
+  return db.employee.findFirst({
+    where: {
+      id: Number(id),
+    },
+  })
 }
 
-export const createPerson = (person) => {
-  const id = uuid()
-  persons.push({ id, ...person })
-  return getPerson(id)
+export const createPerson = async (person) => {
+  return db.employee.create({ data: { ...person } })
 }
 
 export const updatePerson = (id, person) => {

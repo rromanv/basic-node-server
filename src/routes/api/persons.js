@@ -10,25 +10,27 @@ import {
 
 const router = Router()
 
-router.get('/', (req, res) => {
-  const persons = getPersons()
+router.get('/', async (req, res) => {
+  const persons = await getPersons()
   res.send(persons)
 })
 
-router.get('/:id', (req, res) => {
-  const person = getPerson(req.params.id)
+router.get('/:id', async (req, res) => {
+  const person = await getPerson(req.params.id)
   if (person) {
     res.send(person)
+  } else {
+    res.status(404).send({ msg: 'Person not found' })
   }
-  res.status(404).send({ msg: 'Person not found' })
 })
 
-router.post('/', (req, res) => {
-  const newPerson = createPerson(req.body)
+router.post('/', async (req, res) => {
+  const newPerson = await createPerson(req.body)
   if (newPerson) {
     res.status(201).send(newPerson)
+  } else {
+    res.status(400).send({ msg: 'Bad request' })
   }
-  res.status(400).send({ msg: 'Bad request' })
 })
 
 router.put('/:id', (req, res) => {
