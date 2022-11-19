@@ -2,7 +2,6 @@ import './utils/config'
 
 import express from 'express'
 import morgan from 'morgan'
-import cors from 'cors'
 import helmet from 'helmet'
 import bodyParser from 'body-parser'
 import basicAuth from 'express-basic-auth'
@@ -21,13 +20,6 @@ app.use(
   }),
 )
 app.use(morgan(process.env.MORGAN_LOG))
-app.use(
-  cors({
-    origin: process.env.CORS_ORIGIN,
-    credentials: true,
-    preflightContinue: true,
-  }),
-)
 app.use(helmet())
 app.use(bodyParser.json())
 
@@ -35,15 +27,6 @@ app.use('/', router)
 
 app.use(notFound)
 app.use(errorHandler)
-
-app.options(
-  '*',
-  cors({
-    origin: process.env.CORS_ORIGIN,
-    credentials: true,
-    preflightContinue: true,
-  }),
-)
 
 app.listen(port, () => {
   logger.info(`Server running on port ${port}`)
