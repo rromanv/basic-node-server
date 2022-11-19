@@ -26,7 +26,9 @@ const corsOptions = {
   origin: process.env.CORS_ORIGIN,
   credentials: true,
   preflightContinue: true,
+  optionsSuccessStatus: 200,
 }
+
 app.options('*', cors(corsOptions))
 app.use(cors(corsOptions))
 app.use(helmet())
