@@ -28,6 +28,7 @@ const corsOptions = {
   optionsSuccessStatus: 200,
 }
 
+app.options('*', cors({ origin: '*' }))
 app.use(cors(corsOptions))
 app.use(bodyParser.json())
 
