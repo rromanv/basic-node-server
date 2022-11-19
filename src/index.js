@@ -36,6 +36,8 @@ app.use('/', router)
 app.use(notFound)
 app.use(errorHandler)
 
+app.options('*', cors())
+
 app.listen(port, () => {
   logger.info(`Server running on port ${port}`)
 })
