@@ -36,7 +36,14 @@ app.use('/', router)
 app.use(notFound)
 app.use(errorHandler)
 
-app.options('*', cors())
+app.options(
+  '*',
+  cors({
+    origin: process.env.CORS_ORIGIN,
+    credentials: true,
+    preflightContinue: true,
+  }),
+)
 
 app.listen(port, () => {
   logger.info(`Server running on port ${port}`)
