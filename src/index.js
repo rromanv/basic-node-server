@@ -14,6 +14,7 @@ import { notFound, errorHandler } from './utils/errors'
 const port = Number(process.env.PORT)
 
 const app = express()
+app.use(helmet())
 
 app.use(
   basicAuth({
@@ -30,7 +31,6 @@ const corsOptions = {
 }
 
 app.use(cors(corsOptions))
-app.use(helmet())
 app.use(bodyParser.json())
 
 app.use('/', router)
