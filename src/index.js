@@ -22,7 +22,11 @@ app.use(
 )
 app.use(morgan(process.env.MORGAN_LOG))
 app.use(cors({ origin: process.env.CORS_ORIGIN }))
-app.use(helmet())
+app.use(
+  helmet({
+    contentSecurityPolicy: false,
+  }),
+)
 app.use(bodyParser.json())
 
 app.use('/', router)
