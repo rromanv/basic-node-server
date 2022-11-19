@@ -21,14 +21,13 @@ app.use(
 )
 app.use(morgan(process.env.MORGAN_LOG))
 
-const corsOptions = {
-  origin: process.env.CORS_ORIGIN,
-  credentials: true,
-  preflightContinue: true,
-  optionsSuccessStatus: 200,
-}
-
-app.use(cors(corsOptions))
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', '*')
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE')
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type')
+  res.setHeader('Access-Control-Allow-Credentials', true)
+  next()
+})
 app.use(bodyParser.json())
 
 app.use('/', router)
