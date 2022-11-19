@@ -23,7 +23,7 @@ app.use(morgan(process.env.MORGAN_LOG))
 
 const corsOptions = {
   origin: process.env.CORS_ORIGIN,
-  // credentials: true,
+  credentials: true,
   // preflightContinue: true,
   // optionsSuccessStatus: 200,
 }
