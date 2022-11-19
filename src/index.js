@@ -3,7 +3,6 @@ import './utils/config'
 import express from 'express'
 import morgan from 'morgan'
 import cors from 'cors'
-import helmet from 'helmet'
 import bodyParser from 'body-parser'
 import basicAuth from 'express-basic-auth'
 
@@ -14,7 +13,6 @@ import { notFound, errorHandler } from './utils/errors'
 const port = Number(process.env.PORT)
 
 const app = express()
-app.use(helmet())
 
 app.use(
   basicAuth({
