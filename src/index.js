@@ -21,7 +21,13 @@ app.use(
   }),
 )
 app.use(morgan(process.env.MORGAN_LOG))
-app.use(cors({ origin: process.env.CORS_ORIGIN, credentials: true }))
+app.use(
+  cors({
+    origin: process.env.CORS_ORIGIN,
+    credentials: true,
+    preflightContinue: true,
+  }),
+)
 app.use(helmet())
 app.use(bodyParser.json())
 
